@@ -36,27 +36,17 @@ window.addEventListener("load", function () {
   }
 
   var buildUrl = "Build";
-  var loaderUrl = buildUrl + "/Build.loader.js";
+  var loaderUrl = buildUrl + "/Remi_Infinity_TestBuild.loader.js";
   var config = {
-    dataUrl: buildUrl + "/Build.data.unityweb",
-    frameworkUrl: buildUrl + "/Build.framework.js.unityweb",
-    codeUrl: buildUrl + "/Build.wasm.unityweb",
+    dataUrl: buildUrl + "/Remi_Infinity_TestBuild.data.unityweb",
+    frameworkUrl: buildUrl + "/Remi_Infinity_TestBuild.framework.js.unityweb",
+    codeUrl: buildUrl + "/Remi_Infinity_TestBuild.wasm.unityweb",
     streamingAssetsUrl: "StreamingAssets",
     companyName: "Monoverse_Game",
     productName: "Remi_Stair",
     productVersion: "0.9",
     showBanner: unityShowBanner,
   };
-
-  function updateCanvasSize(){
-    var width = window.innerWidth
-    var height = window.innerHeight;
-    canvas.width = width;
-    canvas.height = height;   
-    unityInstanceRef.Module.SetResolution(width, height, true);
-  }
-
-  window.addEventListener('resize', updateCanvasSize);
 
   // By default Unity keeps WebGL canvas render target size matched with
   // the DOM size of the canvas element (scaled by window.devicePixelRatio)

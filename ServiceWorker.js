@@ -1,9 +1,9 @@
 const cacheName = "Monoverse_Game-Remi_Stair-0.9";
 const contentToCache = [
-    "Build/Build.loader.js",
-    "Build/Build.framework.js.unityweb",
-    "Build/Build.data.unityweb",
-    "Build/Build.wasm.unityweb",
+    "Build/Remi_Infinity_TestBuild.loader.js",
+    "Build/Remi_Infinity_TestBuild.framework.js.unityweb",
+    "Build/Remi_Infinity_TestBuild.data.unityweb",
+    "Build/Remi_Infinity_TestBuild.wasm.unityweb",
     "TemplateData/style.css"
 
 ];
