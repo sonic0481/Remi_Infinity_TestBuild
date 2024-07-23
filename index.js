@@ -41,10 +41,11 @@ window.addEventListener("load", function () {
     dataUrl: buildUrl + "/Remi_Infinity_TestBuild.data.unityweb",
     frameworkUrl: buildUrl + "/Remi_Infinity_TestBuild.framework.js.unityweb",
     codeUrl: buildUrl + "/Remi_Infinity_TestBuild.wasm.unityweb",
+    symbolsUrl: buildUrl + "/Remi_Infinity_TestBuild.symbols.json.unityweb",
     streamingAssetsUrl: "StreamingAssets",
     companyName: "Monoverse_Game",
     productName: "Remi_Stair",
-    productVersion: "1.0.1",
+    productVersion: "1.0.2",
     showBanner: unityShowBanner,
   };
 
