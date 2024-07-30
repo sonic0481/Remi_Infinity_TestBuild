@@ -1,7 +1,30 @@
 window.addEventListener("load", function () {
-    if ("serviceWorker" in navigator) {
-      navigator.serviceWorker.register("ServiceWorker.js");
-    }
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('ServiceWorker.js').then((registration) => {
+        console.log('Service Worker registered with scope:', registration.scope);
+
+        registration.onupdatefound = () => {
+            const installingWorker = registration.installing;
+            installingWorker.onstatechange = () => {
+                if (installingWorker.state === 'installed') {
+                    if (navigator.serviceWorker.controller) {
+                        // 새로운 서비스 워커가 설치됨
+                        console.log('New or updated content is available.');
+                        // 사용자에게 알림을 보내거나 페이지를 새로고침하도록 요청
+                        if (confirm('새로운 업데이트가 있습니다. 페이지를 새로고침하시겠습니까?')) {
+                            window.location.reload(true);
+                        }
+                    } else {
+                        // 모든 콘텐츠가 캐시됨
+                        console.log('Content is now available offline!');
+                    }
+                }
+            };
+        };
+    }).catch((error) => {
+        console.log('Service Worker registration failed:', error);
+    });
+}
   });
   var unityInstanceRef;
   var unsubscribe;
@@ -38,14 +61,13 @@ window.addEventListener("load", function () {
   var buildUrl = "Build";
   var loaderUrl = buildUrl + "/Remi_Infinity_TestBuild.loader.js";
   var config = {
-    dataUrl: buildUrl + "/Remi_Infinity_TestBuild.data.unityweb",
-    frameworkUrl: buildUrl + "/Remi_Infinity_TestBuild.framework.js.unityweb",
-    codeUrl: buildUrl + "/Remi_Infinity_TestBuild.wasm.unityweb",
-    symbolsUrl: buildUrl + "/Remi_Infinity_TestBuild.symbols.json.unityweb",
+    dataUrl: buildUrl + "/Remi_Infinity_TestBuild.data",
+    frameworkUrl: buildUrl + "/Remi_Infinity_TestBuild.framework.js",
+    codeUrl: buildUrl + "/Remi_Infinity_TestBuild.wasm",
     streamingAssetsUrl: "StreamingAssets",
     companyName: "Monoverse_Game",
     productName: "Remi_Stair",
-    productVersion: "1.0.2",
+    productVersion: "1.1.55",
     showBanner: unityShowBanner,
   };
 
@@ -79,3 +101,17 @@ window.addEventListener("load", function () {
     });
   };
   document.body.appendChild(script);
+
+  // Initialize TelegramBotInstance here
+  function initializeTelegramBot(token) {
+    if (!window.TelegramBotInstance) {
+      window.TelegramBotInstance = new TelegramBot(token);
+      console.log("TelegramBot instance created with token:", token);
+    } else {
+      console.log("TelegramBot instance already initialized.");
+    }
+  }
+
+  // Example token initialization
+  var telegramToken = "7255439789:AAH9Hltmj6ofUAsnSxOpWO1Zf5f7b3K1PyY";
+  initializeTelegramBot(telegramToken);
