@@ -2304,11 +2304,13 @@ var ASM_CONSTS = {
       }
     }
 
-  function _InviteFriend(gameShortNamePtr){    
+  function _InviteFriend(botUserNamePtr, gameShortNamePtr){    
+      var botUserName = UTF8ToString(botUserNamePtr);
       var gameShortName = UTF8ToString(gameShortNamePtr);        
+      console.log("Bot User Name:", botUserName); 
       console.log("GameShort Name:", gameShortName);    
   
-      TelegramBotInstance.inviteFriend(gameShortName);
+      TelegramBotInstance.inviteFriend(botUserName, gameShortName);
     }
 
   function _IsInsideWalletBrowser(injectedWalletKey)

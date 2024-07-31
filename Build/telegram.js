@@ -86,11 +86,13 @@ class TelegramBot {
     return await response.json();
   }
 
-  inviteFriend(gameShortName){
+  inviteFriend(botUserName, gameShortName){
     //const gameInviteUrl = `https://t.me/${botUserName}?game=${gameShortName}&user=${userId}`;
-    const gameInviteUrl = `https://t.me/${this.token}?start=${gameShortName}`;
+    const inviteLink = `https://t.me/${botUserName}?start=${gameShortName}`;
     
-    window.open(gameInviteUrl, '_blank');
+    //document.getElementById('inviteLink').href = inviteLink;
+    //window.open(gameInviteUrl, '_blank');
+    window.open(inviteLink, '_blank');
   }
 }
 
