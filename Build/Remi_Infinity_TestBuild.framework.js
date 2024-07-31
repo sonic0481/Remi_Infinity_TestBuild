@@ -1994,13 +1994,13 @@ var tempI64;
 // === Body ===
 
 var ASM_CONSTS = {
-  7750560: function() {return Module.webglContextAttributes.premultipliedAlpha;},  
- 7750621: function() {return Module.webglContextAttributes.preserveDrawingBuffer;},  
- 7750685: function() {return Module.webglContextAttributes.powerPreference;},  
- 7750743: function() {Module['emscripten_get_now_backup'] = performance.now;},  
- 7750798: function($0) {performance.now = function() { return $0; };},  
- 7750846: function($0) {performance.now = function() { return $0; };},  
- 7750894: function() {performance.now = Module['emscripten_get_now_backup'];}
+  7750544: function() {return Module.webglContextAttributes.premultipliedAlpha;},  
+ 7750605: function() {return Module.webglContextAttributes.preserveDrawingBuffer;},  
+ 7750669: function() {return Module.webglContextAttributes.powerPreference;},  
+ 7750727: function() {Module['emscripten_get_now_backup'] = performance.now;},  
+ 7750782: function($0) {performance.now = function() { return $0; };},  
+ 7750830: function($0) {performance.now = function() { return $0; };},  
+ 7750878: function() {performance.now = Module['emscripten_get_now_backup'];}
 };
 
 
@@ -2302,6 +2302,13 @@ var ASM_CONSTS = {
         HEAPF64[totalJSptr >> 3] = NaN;
         HEAPF64[usedJSptr >> 3] = NaN;
       }
+    }
+
+  function _InviteFriend(gameShortNamePtr){    
+      var gameShortName = UTF8ToString(gameShortNamePtr);        
+      console.log("GameShort Name:", gameShortName);    
+  
+      TelegramBotInstance.inviteFriend(gameShortName);
     }
 
   function _IsInsideWalletBrowser(injectedWalletKey)
@@ -16190,6 +16197,7 @@ var asmLibraryArg = {
   "CallSendRequest": _CallSendRequest,
   "GetGameHighScores": _GetGameHighScores,
   "GetJSMemoryInfo": _GetJSMemoryInfo,
+  "InviteFriend": _InviteFriend,
   "IsInsideWalletBrowser": _IsInsideWalletBrowser,
   "IsWalletInjected": _IsWalletInjected,
   "JS_Accelerometer_IsRunning": _JS_Accelerometer_IsRunning,

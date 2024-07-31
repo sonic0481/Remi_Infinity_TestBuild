@@ -67,7 +67,7 @@ window.addEventListener("load", function () {
     streamingAssetsUrl: "StreamingAssets",
     companyName: "Monoverse_Game",
     productName: "Remi_Stair",
-    productVersion: "1.1.55",
+    productVersion: "1.1.58",
     showBanner: unityShowBanner,
   };
 

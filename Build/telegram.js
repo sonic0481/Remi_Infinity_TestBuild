@@ -5,7 +5,7 @@ class TelegramBot {
 
   setUserInfo(userId, messageId){
     this.user_id = userId;
-    this.message_id = messageId;
+    this.message_id = messageId;    
   }
 
   async sendGame(chatId, gameShortName){
@@ -84,6 +84,13 @@ class TelegramBot {
       throw new Error(`Failed to get game high score: ${response.statusText}`);
     }
     return await response.json();
+  }
+
+  inviteFriend(gameShortName){
+    //const gameInviteUrl = `https://t.me/${botUserName}?game=${gameShortName}&user=${userId}`;
+    const gameInviteUrl = `https://t.me/${this.token}?start=${gameShortName}`;
+    
+    window.open(gameInviteUrl, '_blank');
   }
 }
 
