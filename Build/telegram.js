@@ -88,7 +88,8 @@ class TelegramBot {
 
   inviteFriend(botUserName, gameShortName){
     //const gameInviteUrl = `https://t.me/${botUserName}?game=${gameShortName}&user=${userId}`;
-    const inviteLink = `https://t.me/${botUserName}?start=${gameShortName}`;
+    //const inviteLink = `https://t.me/${botUserName}?start=${gameShortName}`;
+    const inviteLink = `https://t.me/${botUserName}`;
     
     //document.getElementById('inviteLink').href = inviteLink;
     //window.open(gameInviteUrl, '_blank');
