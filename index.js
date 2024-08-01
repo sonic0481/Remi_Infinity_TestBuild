@@ -11,9 +11,9 @@ window.addEventListener("load", function () {
                         // 새로운 서비스 워커가 설치됨
                         console.log('New or updated content is available.');
                         // 사용자에게 알림을 보내거나 페이지를 새로고침하도록 요청
-                        if (confirm('새로운 업데이트가 있습니다. 페이지를 새로고침하시겠습니까?')) {
-                            window.location.reload(true);
-                        }
+                        // if (confirm('새로운 업데이트가 있습니다. 페이지를 새로고침하시겠습니까?')) {
+                        //     window.location.reload(true);
+                        // }
                     } else {
                         // 모든 콘텐츠가 캐시됨
                         console.log('Content is now available offline!');
@@ -67,7 +67,7 @@ window.addEventListener("load", function () {
     streamingAssetsUrl: "StreamingAssets",
     companyName: "Monoverse_Game",
     productName: "Remi_Stair",
-    productVersion: "1.1.63",
+    productVersion: "1.1.64",
     showBanner: unityShowBanner,
   };
 

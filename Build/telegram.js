@@ -92,7 +92,7 @@ class TelegramBot {
     //const inviteLink = `https://t.me/${botUserName}?start=invite`;
     const url = 'https://t.me/jsjgametest_bot';
     const text = 'Join me in this awesome game!!!!!!!';
-    const inviteLink = `https://t.me/share?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`;
+    const inviteLink = `https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`;
     
     //document.getElementById('inviteLink').href = inviteLink;
     //window.open(gameInviteUrl, '_blank');

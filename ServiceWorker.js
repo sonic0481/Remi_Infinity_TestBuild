@@ -1,4 +1,4 @@
-const cacheName = "Monoverse_Game-Remi_Stair-1.1.63";
+const cacheName = "Monoverse_Game-Remi_Stair-1.1.64";
 const contentToCache = [
     "Build/Remi_Infinity_TestBuild.loader.js",
     "Build/Remi_Infinity_TestBuild.framework.js",
