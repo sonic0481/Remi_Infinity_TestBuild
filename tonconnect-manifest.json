@@ -1,0 +1,7 @@
+{
+    "url": "https://sonic0481.github.io/Remi_Infinity_TestBuild/",                        // required
+    "name": "Remi_Stair",                      // required
+    "iconUrl": "https://sonic0481.github.io/Remi_Infinity_TestBuild/TemplateData/icons/unity-logo-dark.png"               // required
+    //"termsOfUseUrl": "<terms-of-use-url>",     // optional
+    //"privacyPolicyUrl": "<privacy-policy-url>" // optional
+  }
