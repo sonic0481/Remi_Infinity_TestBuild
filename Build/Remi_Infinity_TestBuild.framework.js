@@ -1994,13 +1994,13 @@ var tempI64;
 // === Body ===
 
 var ASM_CONSTS = {
-  7162208: function() {return Module.webglContextAttributes.premultipliedAlpha;},  
- 7162269: function() {return Module.webglContextAttributes.preserveDrawingBuffer;},  
- 7162333: function() {return Module.webglContextAttributes.powerPreference;},  
- 7162391: function() {Module['emscripten_get_now_backup'] = performance.now;},  
- 7162446: function($0) {performance.now = function() { return $0; };},  
- 7162494: function($0) {performance.now = function() { return $0; };},  
- 7162542: function() {performance.now = Module['emscripten_get_now_backup'];}
+  7162240: function() {return Module.webglContextAttributes.premultipliedAlpha;},  
+ 7162301: function() {return Module.webglContextAttributes.preserveDrawingBuffer;},  
+ 7162365: function() {return Module.webglContextAttributes.powerPreference;},  
+ 7162423: function() {Module['emscripten_get_now_backup'] = performance.now;},  
+ 7162478: function($0) {performance.now = function() { return $0; };},  
+ 7162526: function($0) {performance.now = function() { return $0; };},  
+ 7162574: function() {performance.now = Module['emscripten_get_now_backup'];}
 };
 
 
@@ -2194,6 +2194,11 @@ var ASM_CONSTS = {
     }
 
   function _InviteFriend(botUserNamePtr, gameShortNamePtr){    
+      if (TelegramBotInstance === null) {
+        console.error("Bot instance is not initialized.");
+        return;
+      }
+  
       var botUserName = UTF8ToString(botUserNamePtr);
       var gameShortName = UTF8ToString(gameShortNamePtr);        
       console.log("Bot User Name:", botUserName); 
@@ -4796,6 +4801,26 @@ var ASM_CONSTS = {
         unityInstanceRef.SendMessage( "TelegramBot", "OnSendGame", JSON.stringify(result) );
       }).catch(error => {
         console.error("Failed to send game :", error);
+        unityInstanceRef.SendMessage("TelegramBot", "OnError", JSON.stringify(error));  
+      });
+    }
+
+  function _SendInvoice(chatIdPtr, starPtr){
+      if (TelegramBotInstance === null) {
+        console.error("Bot instance is not initialized.");
+        return;
+      }
+      console.log("Send Invoice");
+  
+      var chatId = parseInt(UTF8ToString(chatIdPtr));
+      var star = starPtr;
+      console.log("Chat ID:", chatId);
+  
+      TelegramBotInstance.sendInvoice(chatId, star).then( result => {
+        console.log( "Send Invoice Successed : ", result );
+        unityInstanceRef.SendMessage( "TelegramBot", "OnSendInvoice", JSON.stringify(result) );
+      }).catch(error => {
+        console.error("Failed to Send Invoice:", error);
         unityInstanceRef.SendMessage("TelegramBot", "OnError", JSON.stringify(error));  
       });
     }
@@ -16143,6 +16168,7 @@ var asmLibraryArg = {
   "JS_WebRequest_SetRequestHeader": _JS_WebRequest_SetRequestHeader,
   "JS_WebRequest_SetTimeout": _JS_WebRequest_SetTimeout,
   "SendGame": _SendGame,
+  "SendInvoice": _SendInvoice,
   "SendTelegramMessage": _SendTelegramMessage,
   "SetGameScore": _SetGameScore,
   "SetUserInfo": _SetUserInfo,

@@ -15,7 +15,7 @@ class Ton_Connect {
             twaReturnUrl: 'https://t.me/jsjgametest_bot',
             uiPreferences: {
                 borderRadius: 's',
-                displayWalletsList: true, // 지갑 목록을 기본으로 표시
+                displayWalletsList: true // 지갑 목록을 기본으로 표시
             }
         });
     }

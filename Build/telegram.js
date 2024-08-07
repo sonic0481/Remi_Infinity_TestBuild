@@ -98,6 +98,36 @@ class TelegramBot {
     //window.open(gameInviteUrl, '_blank');
     window.open(inviteLink, '_blank');
   }
+
+  async sendInvoice(chatId, star){
+    const invoice = {
+      chat_id: chatId,
+      title : 'Test Product',
+      description: 'This is a test product',
+      payload: 'test-payload',      
+      currency: 'XTR',
+      prices: [
+        { label: 'Test Product_1', amount: star }        
+      ]
+    };
+
+    const response = await fetch(`https://api.telegram.org/bot${this.token}/createInvoiceLink`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(invoice)
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to invoice: ${response.statusText}`);
+    }
+
+    const data = await response.json();    
+    const paymentUrl = data.result;
+    window.open(paymentUrl, '_blank');
+    return await data;
+  }
 }
 
 // Ensure the class is available globally
