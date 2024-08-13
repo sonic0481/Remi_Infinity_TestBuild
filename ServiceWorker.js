@@ -1,9 +1,9 @@
-const cacheName = "Monoverse_Game-Remi_Stair-1.1.716";
+const cacheName = "Monoverse-ton-stair-client-0.0.034";
 const contentToCache = [
-    "Build/Remi_Infinity_TestBuild.loader.js",
-    "Build/Remi_Infinity_TestBuild.framework.js",
-    "Build/Remi_Infinity_TestBuild.data",
-    "Build/Remi_Infinity_TestBuild.wasm",
+    "Build/Builds.loader.js",
+    "Build/Builds.framework.js",
+    "Build/Builds.data",
+    "Build/Builds.wasm",
     "TemplateData/style.css"
 
 ];

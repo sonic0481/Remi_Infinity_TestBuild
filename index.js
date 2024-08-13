@@ -28,7 +28,7 @@ window.addEventListener("load", function () {
   });
   var unityInstanceRef;
   var unsubscribe;
-  var container = document.querySelector("#unity-container");
+  var container = document.querySelector("#gameContainer");
   var canvas = document.querySelector("#unity-canvas");
   var loadingBar = document.querySelector("#unity-loading-bar");
   var progressBarFull = document.querySelector("#unity-progress-bar-full");
@@ -59,15 +59,15 @@ window.addEventListener("load", function () {
   }
 
   var buildUrl = "Build";
-  var loaderUrl = buildUrl + "/Remi_Infinity_TestBuild.loader.js";
+  var loaderUrl = buildUrl + "/Builds.loader.js";
   var config = {
-    dataUrl: buildUrl + "/Remi_Infinity_TestBuild.data",
-    frameworkUrl: buildUrl + "/Remi_Infinity_TestBuild.framework.js",
-    codeUrl: buildUrl + "/Remi_Infinity_TestBuild.wasm",
+    dataUrl: buildUrl + "/Builds.data",
+    frameworkUrl: buildUrl + "/Builds.framework.js",
+    codeUrl: buildUrl + "/Builds.wasm",
     streamingAssetsUrl: "StreamingAssets",
-    companyName: "Monoverse_Game",
-    productName: "Remi_Stair",
-    productVersion: "1.1.716",
+    companyName: "Monoverse",
+    productName: "ton-stair-client",
+    productVersion: "0.0.034",
     showBanner: unityShowBanner,
   };
 
@@ -84,23 +84,7 @@ window.addEventListener("load", function () {
     meta.name = 'viewport';
     meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
     document.getElementsByTagName('head')[0].appendChild(meta);
-  }
-
-  loadingBar.style.display = "block";
-
-  var script = document.createElement("script");
-  script.src = loaderUrl;
-  script.onload = () => {
-    createUnityInstance(canvas, config, (progress) => {
-      progressBarFull.style.width = 100 * progress + "%";
-    }).then((unityInstance) => {
-      window.unityInstanceRef = unityInstance;
-      loadingBar.style.display = "none";
-    }).catch((message) => {
-      alert(message);
-    });
-  };
-  document.body.appendChild(script);
+  }  
 
   // Initialize TelegramBotInstance here
   function initializeTelegramBot(token) {
@@ -135,3 +119,30 @@ window.addEventListener("load", function () {
     // document.head.appendChild(script);
   }
   initializeTonConnect();
+
+function createUnity(){
+  loadingBar.style.display = "block";
+
+  var script = document.createElement("script");
+  script.src = loaderUrl;
+  script.onload = () => {
+    createUnityInstance(canvas, config, (progress) => {
+      progressBarFull.style.width = 100 * progress + "%";
+    }).then((unityInstance) => {
+      window.unityInstanceRef = unityInstance;
+      loadingBar.style.display = "none";
+      container.style.display = "block"; // Show the game container
+      canvas.style.display = "block"; // Ensure the canvas is displayed
+    }).catch((message) => {
+      alert(message);
+    });
+  };
+  document.body.appendChild(script);
+}
+
+  // Add click event listener to the button
+  document.getElementById("gameButton").addEventListener("click", function() {
+    if (!unityInstanceRef) {
+      createUnity(); // Load the Unity game when the button is clicked
+    }
+  });

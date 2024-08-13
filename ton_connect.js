@@ -10,97 +10,68 @@
 //import TonConnect from 'https://unpkg.com/@tonconnect/sdk@latest/dist/tonconnect-sdk.min.js';
 class Ton_Connect {
     constructor() {
+        console.log( 'Initialize TonConnect.' );
         this.tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
-            manifestUrl: 'https://sonic0481.github.io/Remi_Infinity_TestBuild/tonconnect-manifest.json',
-            twaReturnUrl: 'https://t.me/jsjgametest_bot',
-            uiPreferences: {
-                borderRadius: 's',
-                displayWalletsList: true // 지갑 목록을 기본으로 표시
-            }
+            manifestUrl: 'https://r2oncorps.github.io/ton-stair-build/tonconnect-manifest.json'            
         });
+
+        this.tonConnectUI.uiOptions = {
+            twaReturnUrl: 'https://t.me/jsjgametest_bot'
+        };
     }
 
-    async connectWallet() {
+    async isConnectWallet(){
+        const restored = await this.tonConnectUI.connectionRestored;
+        return restored;
+    }
+
+    async connectWallet() {               
+        const connectInfo = await this.tonConnectUI.connectWallet();              
+        return connectInfo;           
+    }        
+
+    async openWallet(){
+        console.log( 'Connection restored Wallet' );                
+        console.log('Wallet Info :', JSON.stringify(this.tonConnectUI.walletInfo));                            
+        window.open(this.tonConnectUI.walletInfo.universalLink, '_blank');
+
+        const walletList = await this.tonConnectUI.getWallets();
+        return walletList;           
+    }
+
+    async sendTransaction(tonAddress, tonAmount, tonPayload){
         try {
-            this.tonConnectUI.connectionRestored.then( restored => {
-                if( restored ){
-                    console.log( 'Connection restored Wallet' );
-                }
-                else {
-                    console.log('Connection was not restored.');
+            const transaction = {
+                validUntil: Math.floor(Date.now() / 1000) + 600,
+                messages: [
+                    {
+                        adress: tonAddress,
+                        amount: tonAmount,
+                        payload: tonPayload
+                    }
+                ],
+            };
 
-                    const connectedWallet = this.tonConnectUI.connectWallet();
-                    this.tonConnectUI.uiOptions = {
-                        twaReturnUrl: 'https://t.me/remi_test'
-                    };
-
-                    return connectedWallet;
-                }
-            } );            
-
-            //// 지갑 연결 시도
-            //await this.tonConnect.connectWallet();
-
-            //// 지갑 정보 가져오기
-            //const walletInfo = this.tonConnect.getWallet();
-            
-            //return walletInfo;
-            // Unity에 지갑 연결 정보 전달
-            // if (window.unityInstance) {
-            //     window.unityInstance.SendMessage('TonConnectManager', 'OnWalletConnected', JSON.stringify(walletInfo));
-            // } else {
-            //     console.warn('Unity instance is not available.');
-            // }
-        } catch (error) {
-            console.error('Error connecting wallet:', error);
-            throw new Error('Failed to connect wallet');
+            const result = await this.tonConnectUI.sendTransaction(transaction);
+            return result;
         }
+        catch(error){
+            throw new Error(`Failed to Transaction: ${error}`);
+        }
+    }
+
+    async disconnectWallet(){
+        try {
+            await this.tonConnectUI.disconnect();
+            console.log('Wallet disconnected successfully.');
+
+            return true;
+        } catch (error) {
+            console.error('Error disconnecting wallet:', error);
+        }
+
+        return false;
     }
 }
 // 모듈을 export하여 다른 스크립트에서 사용할 수 있도록 합니다.
-export default Ton_Connect;
-    
-    // async function sendTransaction(toAddress, amount) {
-    //     try {
-    //         const response = await tonConnect.request({
-    //             method: 'ton_sendTransaction',
-    //             params: {
-    //                 to: toAddress,
-    //                 value: amount,
-    //                 data: '0x',
-    //                 feeLimit: '1000000'
-    //             }
-    //         });
-    
-    //         if (response.error) {
-    //             console.error('Failed to send transaction:', response.error);
-    //         } else {
-    //             console.log('Transaction sent:', response);
-    //             // Unity로 응답 전달
-    //             unityInstanceRef.SendMessage('TonConnectManager', 'OnTransactionSent', JSON.stringify(response));
-    //         }
-    //     } catch (error) {
-    //         console.error('Error sending transaction:', error);
-    //     }
-    // }
-    
-    // async function getAccountInfo() {
-    //     try {
-    //         const response = await tonConnect.request({
-    //             method: 'ton_getAccountInfo',
-    //             params: {}
-    //         });
-    
-    //         if (response.error) {
-    //             console.error('Failed to get account info:', response.error);
-    //         } else {
-    //             console.log('Account info:', response);
-    //             // Unity로 응답 전달
-    //             unityInstanceRef.SendMessage('TonConnectManager', 'OnAccountInfoReceived', JSON.stringify(response));
-    //         }
-    //     } catch (error) {
-    //         console.error('Error getting account info:', error);
-    //     }
-    // }
-//}
-
+export default Ton_Connect;   

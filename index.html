@@ -1,28 +1,67 @@
 <!DOCTYPE html>
-<html lang="en-us">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Unity WebGL Player | Remi_Stair</title>
-    <script src="Build/telegram.js"></script>   
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Web Page with Game Button</title>
+    <script src="telegram.js"></script>   
     <script src="https://unpkg.com/@tonconnect/sdk@latest/dist/tonconnect-sdk.min.js"></script>
     <script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
+    <script src="https://www.unpkg.com/web-animations-js@latest/web-animations.min.js"></script>
     <script src="ton_connect.js"></script>
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
     <link rel="manifest" href="manifest.webmanifest">
-  </head>
-  <body>
-    <div id="unity-container">
-      <canvas id="unity-canvas" width=720 height=1280 tabindex="-1"></canvas>
-      <div id="unity-loading-bar">
-        <div id="unity-logo"></div>
-        <div id="unity-progress-bar-empty">
-          <div id="unity-progress-bar-full"></div>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+        }
+
+        #gameContainer {
+            width: 600px;
+            height: 800px;
+            display: none; /* 게임 컨테이너 초기에는 숨김 */
+            margin-bottom: 20px;
+        }
+
+        #gameButton {
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 게임을 위한 컨테이너 -->
+    <div id="gameContainer">
+        <!-- Unity WebGL 빌드가 여기로 로드될 예정입니다. -->
+        <canvas id="unity-canvas" width=720 height=1280 tabindex="-1"></canvas>
+        <div id="unity-loading-bar">
+          <div id="unity-logo"></div>
+          <div id="unity-progress-bar-empty">
+            <div id="unity-progress-bar-full"></div>
+          </div>
         </div>
-      </div>
-      <div id="unity-warning"> </div>
-    </div>        
+        <div id="unity-warning"> </div>
+    </div>
+
+    <!-- 게임 실행 버튼 -->
+    <button id="gameButton">Play Game</button>
+
+    <!-- Unity 로드 스크립트 -->    
+    <script src="Build/Builds.loader.js"></script>   
     <script type="module" src="index.js"></script>
-  </body>
+
+</body>
 </html>
